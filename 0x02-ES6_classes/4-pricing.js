@@ -31,8 +31,8 @@ export default class Pricing {
   }
 
   set currency(value) {
-    if (typeof value !== 'string') {
-      throw new TypeError('Currency must be a string');
+    if (!(value instanceof Currency)) {
+      throw new TypeError('Currency must be an instance of Currency');
     }
     this._currency = value;
   }
@@ -41,7 +41,7 @@ export default class Pricing {
     return `${this._amount} ${this._currency.name} (${this._currency.code})`;
   }
 
-  convertPrice(amount, conversionRate) {
-    return this._amount * conversionRate;
+  static convertPrice(amount, conversionRate) {
+    return amount * conversionRate;
   }
 }
